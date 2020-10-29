@@ -93,6 +93,9 @@ $(function(){
 			$(contLink).css('display','block');
 			$(this).addClass('on');
 			$(contLink).children('.slickCon').slick('refresh');
+			$('.btn-close').click(function(){
+				$('.ranking.mobile').slick("unslick")
+			})
 		
 		});
 	});
