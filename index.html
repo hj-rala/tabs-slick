@@ -1,288 +1,108 @@
-//이벤트 경품안내 slide
-	var evGSlick1 = function(){
-		$ev1Element = $('#evG01');
-		$ev1Element.slick({
-			slidesToShow: 5,
-			swipeToSlide: true,
-			responsive: [
-				{
-				breakpoint: 1280,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 1,
-					arrows:true
-				  }
-				},
-				{
-				  breakpoint: 750,
-				  settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1
-				  }
-				}
-			]
-		});
-	};
-	evGSlick1();
+<style>
+	.showItem {max-width:1000px; margin: 0 auto;}
+	.showItem img {max-width:100%;}
+	.tabs {width: 100%; overflow: hidden;}
+	.tabs ul li {width: 33.333%; float: left; text-align: center; font-size: 30px; padding: 20px 0; box-sizing:border-box;}
+	.tabs ul li a {display: block;}
+</style>
 
-	var evGSlick2 = function(){
-		$ev2Element = $('#evG02');
-		$ev2Element.slick({
-			infinite: false,
-			slidesToShow: 5,
-			responsive: [
-				{
-				  breakpoint: 1280,
-				  settings: {
-					slidesToShow: 3,
-					slidesToScroll: 1,
-					infinite: true,
-					dots: true
-				  }
-				},
-				{
-				  breakpoint: 750,
-				  settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1
-				  }
-				}
-			]
+
+
+<div class="showItem">
+	<div class="tabs">
+		<ul>
+			<li><a href="#menu01">1</a></li>
+			<li><a href="#menu02">2</a></li>
+			<li><a href="#menu03">3</a></li>
+		</ul>
+	</div>
+
+	<div id="menu01" class="tabCont">
+		<div class="slickCon">
+			<div><img src="img/img_cardnews_01.jpg" alt=""></div>
+			<div><img src="img/img_cardnews_02.jpg" alt=""></div>
+			<div><img src="img/img_cardnews_03.jpg" alt=""></div>
+		</div>
+	</div>
+	<div id="menu02" class="tabCont">
+		<div class="slickCon">
+			<div><img src="img/img_cardnews_04.jpg" alt=""></div>
+			<div><img src="img/img_cardnews_05.jpg" alt=""></div>
+			<div><img src="img/img_cardnews_06.jpg" alt=""></div>
+		</div>
+	</div>
+	<div id="menu03" class="tabCont">
+		<div class="slickCon">
+			<div><img src="img/img_cardnews_07.jpg" alt=""></div>
+			<div><img src="img/img_cardnews_08.jpg" alt=""></div>
+			<div><img src="img/img_cardnews_09.jpg" alt=""></div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+
+<script>
+$(function(){
+	
+
+	//
+	var slickCon = function(){
+		$('.slickCon').each(function(){
+			$(this).slick({ 
+				slidesToShow: 2,
+				swipeToSlide: true,
+				responsive: [
+					{
+					breakpoint: 1280,
+					settings: {
+						slidesToShow: 2,
+						slidesToScroll: 1,
+						arrows:false
+						}
+					},
+					{
+						breakpoint: 750,
+						settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1
+						}
+					}
+				]
+			});
 		});
 	};
-	evGSlick2();
+	slickCon();
 	
-	var evGSlick3 = function(){
-		$ev3Element = $('#evG03');
-		$ev3Element.slick({
-			slidesToShow: 3,
-			slidesToScroll: 1,
-			responsive: [
-				{
-				  breakpoint: 1280,
-				  settings: {
-					slidesToShow: 3,
-					slidesToScroll: 1,
-					infinite: true,
-					dots: true
-				  }
-				},
-				{
-				  breakpoint: 750,
-				  settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1
-				  }
-				}
-			]
-		});
-	};	evGSlick3();
 	
-	//이벤트 경품안내 tabs
-	$('.evGtabs ul li a').each(function(){
+
+	//tab slide
+	$('.tabs ul li > a').each(function(){
+	
 		$(this).bind('click', function(e){
 			e.preventDefault();
-			var myTurn = $(this).attr('data-block');
-			$(this).parent().siblings().prev().removeClass('prev');
-			$(this).parent().prev().addClass('prev');
-			$('.evGtabs ul li a').parent().removeClass('on');
-			$(this).parent().addClass('on');
-			$('.dNone').css('opacity','0');
-			if (myTurn == 'evG01'){
-				$('.dNone').css({'opacity':'0','height':'0'});
-				$('#evG01').css({'height':'100%'});
-				$('#evG01').animate({'opacity':'1'},800);
-			} else if (myTurn == 'evG02'){
-				$('.dNone').css({'opacity':'0','height':'0'});
-				$('#evG02').css({'height':'100%'});
-				$('#evG02').animate({'opacity':'1'},800);
-			} else {
-				$('.dNone').css({'opacity':'0','height':'0'});
-				$('#evG03').css({'height':'100%'});
-				$('#evG03').animate({'opacity':'1'},800);
-			}
+			$('.tabCont').css('display','none');
+			$('.tabs ul li > a').removeClass('on');
+			
+			var contLink = $(this).attr('href');
+			$(contLink).css('display','block');
+			$(this).addClass('on');
+			$(contLink).children('.slickCon').slick('refresh');
+		
 		});
 	});
-	$('.evGtabs ul li:eq(0) a').click();
-  
-  
-  
-  
-  
-  
-  
-  <section id="event2">
-					<h2>이벤트 <span>경품안내</span></h2>
-					<p class="tTxt">#블루웨이브챌린지 경품은 주간 이벤트는 Lv. 2 이상 및 주 1회 이상 참여 고객을 대상으로, 최종 경품의 경우 이벤트 기간 동안 Lv. 4에 도달한 고객을 대상으로 추첨을 진행합니다.</p>
-					
-					<div class="giveaway">
-						<div class="evGtabs">
-							<ul>
-								<li>
-									<a href="javascript:;" data-block="evG01">
-										<span><u>이벤트</u>최종</span>
-									</a>
-								</li>
-								<li>
-									<a href="javascript:;" data-block="evG02">
-										<span><u>이벤트</u>주간</span>
-									</a>
-								</li>
-								<li>
-									<a href="javascript:;" data-block="evG03">
-										<span><u>이벤트</u>즉석</span>
-									</a>
-								</li>
-							</ul>
-						</div>
+	$('.tabs ul li:eq(0) a').click();
+	
+	
 
-						<div class="evGCon">
+});
 
-							<div id="evG01" class="evSlide dNone">
-								<div>
-									<div class="img"><img src="./resources/images/main/img_giveway_ex.png" alt="예제 이미지" /></div>
-									<div class="txt">
-										<span class="level lv4">LV.4</span>
-										<p>르노삼성 XM3<br/>1명</p>
-									</div>
-								</div>
-						
-								<div>
-									<div class="img"><img src="./resources/images/main/img_giveway_ex.png" alt="예제 이미지" /></div>
-									<div class="txt">
-										<span class="level lv3">LV.3</span>
-										<p>르노삼성 XM3<br/>1명</p>
-									</div>
-								</div>
-						
-								<div>
-									<div class="img"><img src="./resources/images/main/img_giveway_ex.png" alt="예제 이미지" /></div>
-									<div class="txt">
-										<span class="level lv2">LV.2</span>
-										<p>LG 그램 17인치 2020<br/>3명</p>
-									</div>
-								</div>
-						
-								<div>
-									<div class="img"><img src="./resources/images/main/img_giveway_ex.png" alt="예제 이미지" /></div>
-									<div class="txt">
-										<span class="level lv1">LV.1</span>
-										<p>르노삼성 XM3<br/>1명</p>
-									</div>
-								</div>
-						
-								<div>
-									<div class="img"><img src="./resources/images/main/img_giveway_ex.png" alt="예제 이미지" /></div>
-									<div class="txt">
-										<span class="level lv2">LV.2</span>
-										<p>르노삼성 XM3<br/>1명</p>
-									</div>
-								</div>
-							</div>
-							
-							<div id="evG02" class="evSlide dNone">
-								<div>
-									<div class="img"><img src="./resources/images/main/img_giveway_ex.png" alt="예제 이미지" /></div>
-									<div class="txt">
-										<span class="level lv4">LV.4</span>
-										<p>LG 그램 17인치 2020<br/>3명</p>
-									</div>
-								</div>
-						
-								<div>
-									<div class="img"><img src="./resources/images/main/img_giveway_ex.png" alt="예제 이미지" /></div>
-									<div class="txt">
-										<span class="level lv4">LV.4</span>
-										<p>르노삼성 XM3<br/>1명</p>
-									</div>
-								</div>
-						
-								<div>
-									<div class="img"><img src="./resources/images/main/img_giveway_ex.png" alt="예제 이미지" /></div>
-									<div class="txt">
-										<span class="level lv4">LV.4</span>
-										<p>르노삼성 XM3<br/>1명</p>
-									</div>
-								</div>
-							</div>
-							
-							
-							<div id="evG03" class="evSlide dNone">
-								<div>
-									<div class="img"><img src="./resources/images/main/img_giveway_ex.png" alt="예제 이미지" /></div>
-									<div class="txt">
-										<span class="level lv3">LV.3</span>
-										<p>르노삼성 XM3<br/>1명</p>
-									</div>
-								</div>
-						
-								<div>
-									<div class="img"><img src="./resources/images/main/img_giveway_ex.png" alt="예제 이미지" /></div>
-									<div class="txt">
-										<span class="level lv2">LV.2</span>
-										<p>LG 그램 17인치 2020<br/>3명</p>
-									</div>
-								</div>
-						
-								<div>
-									<div class="img"><img src="./resources/images/main/img_giveway_ex.png" alt="예제 이미지" /></div>
-									<div class="txt">
-										<span class="level lv1">LV.1</span>
-										<p>르노삼성 XM3<br/>1명</p>
-									</div>
-								</div>
-							</div>
 
-							<div></div>
-						</div>
-					</div>
-					
-				</section>
-        
-        
-        
-        
-        
-        
-  
-  
-  
-  
-  /* event2 */
-.conWrap section .tTxt {padding:12px 0 42px; font-size:20px; color:#a3e4ff; font-weight:500; line-height:1.4; letter-spacing:-0.8px;}
-.conWrap section .giveaway {position:relative; width:100%; z-index:2; margin-top:45px;}
-.conWrap section .giveaway:after {content:""; display:block; clear:both;}
-.conWrap section .giveaway .evGtabs {position:absolute; top:-45px; left:0; width:100%;}
-.conWrap section .giveaway .evGtabs:after {content:""; display:block; clear:both;}
-.conWrap section .giveaway .evGtabs ul {position:relative; width:100%; z-index:2; border-radius:50px; background: linear-gradient(#def6ff, #ace3f7);-webkit-box-shadow: rgba(30,46,62,0.2) 0px 18px 16px; -moz-box-shadow: rgba(30,46,62,0.2) 0 18px 16px; box-shadow: rgba(30,46,62,0.2) 0 18px 16px;}
-.conWrap section .giveaway .evGtabs ul:after {content:""; display:block; clear:both;}
-.conWrap section .giveaway .evGtabs ul li {float:left; width:33.333%;}
-.conWrap section .giveaway .evGtabs ul li {position:relative; display:block; height:90px; line-height:90px; text-align:center; }
-.conWrap section .giveaway .evGtabs ul li a {position:relative; display:block; height:90px; line-height:90px; text-align:center;}
-.conWrap section .giveaway .evGtabs ul li.on a:after {content:""; display:inline-block; width:100%; height:100%; position:absolute; top:0; left:0; background:#00456d; border-radius:50px; z-index:1;}
-.conWrap section .giveaway .evGtabs ul li a:before {content:""; display:inline-block; position:absolute; top:20px; right:0; width:2px; height:53px; background:#689bbb; vertical-align:middle;}
-.conWrap section .giveaway .evGtabs ul li:nth-of-type(1) a {border-radius:50px 0 0 50px;}
-.conWrap section .giveaway .evGtabs ul li:nth-of-type(3) a {border-radius:0 50px 50px 0;}
-.conWrap section .giveaway .evGtabs ul li:nth-of-type(3) a:after {left:1px;}
-.conWrap section .giveaway .evGtabs ul li:nth-of-type(3) a:before {display:none;}
-.conWrap section .giveaway .evGtabs ul li.on a:before {display:none;}
-.conWrap section .giveaway .evGtabs ul li.on a span:before {position:absolute; bottom:; margin-left:0; background:url('../images/main/icon_event_tab_on.png') 0 0 no-repeat; vertical-align:middle;}
-.conWrap section .giveaway .evGtabs ul li.prev a:before {display:none;}
-.conWrap section .giveaway .evGtabs ul li a span {position:relative; display:inline-block; margin-top:6px; z-index:2; font-size:28px; color:#046597; font-weight:500; line-height:53px; vertical-align:middle;}
-.conWrap section .giveaway .evGtabs ul li a span:after {content:""; display:inline-block; position:absolute; top:14px; right:-30px; width:22px; height:22px; background:url('../images/main/icon_event_tab_off.png') 0 0 no-repeat; vertical-align:middle;}
-.conWrap section .giveaway .evGtabs ul li a span u {text-decoration:none; margin-right:8px; font-size:15px; color:#22a4d9; font-weight:500; line-height:53px; display:inline-block; vertical-align:middle;}
-.conWrap section .giveaway .evGtabs ul li.on a span {color:#fff;}
-.conWrap section .giveaway .evGtabs ul li.on a span u {color:#7ed5ff;}
-.conWrap section .giveaway .evGtabs ul li.on a span:after {position:absolute; top:auto; right:auto; bottom:-24px; left:50%; margin-left:-12px; width:24px; height:24px; background:url('../images/main/icon_event_tab_on.png') 0 0 no-repeat;}
 
-.conWrap section .giveaway .dNone { opacity:0; height:0; width:100%;}
-.conWrap section .giveaway .evGCon {position:relative;/* position:absolute; top:0; left:0; z-index:1; */width:100%; height:430px; padding-top:45px; background:#1a9bd0; border-radius:0 0 40px 40px; -webkit-box-shadow: rgba(51,51,51,0.2) 0px 21px 35px; -moz-box-shadow: rgba(51,51,51,0.2) 0 21px 35px; box-shadow: rgba(51,51,51,0.2) 0 21px 35px;}
-.conWrap section .giveaway .evGCon .evSlide {position:absolute; top:0; left:0;width:100%; overflow:hidden;}
-/* .conWrap section .giveaway .evGCon .slick-slide {width:240px;} */
-.conWrap section .giveaway .evGCon .slick-slide > div {/* width:240px; */margin:0 10px; text-align:center; padding-top:54px; }
-.conWrap section .giveaway .evGCon .slick-slide .img {margin:0 auto;height:190px; padding-top:54px; }
-.conWrap section .giveaway .evGCon .slick-slide .img img {max-width:100%;width:; height:190px; margin:0 auto;display:block;}
-.conWrap section .giveaway .evGCon .slick-slide .txt {width:100%;}
-.conWrap section .giveaway .evGCon .slick-slide .txt p {padding-top:10px; font-size:18px; color:#fff; font-weight:500; line-height:1.4;}
-/* .conWrap section .giveaway .evGCon .slick-dots li {width:16px; height:16px; border-width:3px;} */
-  
+</script>
+
